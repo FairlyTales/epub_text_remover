@@ -135,6 +135,76 @@ python epub_text_remover.py book.epub --remove "text" --dry-run --verbose
 - Original files are automatically backed up with `.bak` extension (unless `--no-backup` is used)
 - The script provides a summary of changes made and files processed
 
+## EPUB to FB2 Conversion
+
+This repository also includes a bash script for converting EPUB files to FB2 format using Calibre.
+
+### Requirements for Conversion
+
+- [Calibre](https://calibre-ebook.com/) must be installed on your system
+- The script assumes Calibre is installed in the default macOS location: `/Applications/calibre.app/Contents/MacOS/ebook-convert`
+
+### Usage
+
+1. **Place the script in the directory containing your EPUB files**
+
+2. **Make the script executable:**
+
+   ```bash
+   chmod +x epub_to_fb2_convert.sh
+   ```
+
+3. **Run the conversion:**
+   ```bash
+   ./epub_to_fb2_convert.sh
+   ```
+
+### What the Script Does
+
+- Automatically finds all `.epub` files in the current directory
+- Creates a `fb2_converted` directory for output files
+- Converts each EPUB file to FB2 format using Calibre's `ebook-convert` tool
+- Shows progress with a counter (`[1/5] Converting: book.epub`)
+- Provides success/failure feedback for each conversion
+- Displays a final summary of successful conversions
+
+### Example Output
+
+```
+Starting conversion of 3 EPUB files to FB2 format...
+============================================
+[1/3] Converting: book1.epub
+  ✓ Successfully converted to: fb2_converted/book1.fb2
+
+[2/3] Converting: book2.epub
+  ✓ Successfully converted to: fb2_converted/book2.fb2
+
+[3/3] Converting: book3.epub
+  ✓ Successfully converted to: fb2_converted/book3.fb2
+
+============================================
+Conversion complete!
+Converted files are in the 'fb2_converted' directory
+Successfully converted: 3 out of 3 files
+```
+
+### Workflow Recommendation
+
+For best results when cleaning ebooks:
+
+1. **First, clean the EPUB files:**
+
+   ```bash
+   python epub_text_remover.py *.epub --remove-page-numbers --verbose
+   ```
+
+2. **Then convert the cleaned files to FB2:**
+   ```bash
+   ./epub_to_fb2_convert.sh
+   ```
+
+This ensures your FB2 files are free of unwanted text patterns like page numbers and watermarks.
+
 ## Notes
 
 - The script processes HTML and XHTML files within the EPUB
