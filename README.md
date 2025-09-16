@@ -1,2 +1,3 @@
-# epub_text_remover
+# epub text remover
+
 Small script for removing text from epub books
